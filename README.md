@@ -11,6 +11,11 @@
 5. работа с Яндекс-картами;
 6. подключение веб-сокета;
 7. создание кастомных элементов интерфейса и т.д.
+![1](https://github.com/almadu-guru/crm-coin/assets/117567523/7c0410a1-4b55-47dd-9757-06e1b1b993c2)
+![2](https://github.com/almadu-guru/crm-coin/assets/117567523/f1f9639c-3e32-42b4-b35a-b5fb1c1a787c)
+![localhost_9000_accounts_74213041477477406320783754](https://github.com/almadu-guru/crm-coin/assets/117567523/0a53d59b-fbad-4263-868d-d150b319a68a)
+![localhost_9000_exchange](https://github.com/almadu-guru/crm-coin/assets/117567523/23e651c1-8e50-4583-83bd-916f7eb13d18)
+![localhost_9000_points](https://github.com/almadu-guru/crm-coin/assets/117567523/5f1c99fe-2ae7-4360-830c-9208399f6ee0)
 
 ## Установка
 
