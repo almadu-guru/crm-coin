@@ -1,0 +1,3 @@
+*.js linguist-language=webpack
+*.css linguist-language=webpack
+*.html linguist-language=webpack
