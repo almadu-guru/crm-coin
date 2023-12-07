@@ -1,0 +1,725 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap')
+
+main
+  display: flex
+  flex-direction: column
+  min-height: max(calc( 100vh - 106px ), 400px) // min высота - вся высота экрана без шапки, но не менее 320px
+
+.container
+  // border: 1px solid black
+  position: relative
+  flex-grow: 1
+  margin: 0 auto
+  width: 100%
+  min-height: 100% !important
+  max-width: 1440px
+  padding: 0 50px
+
+.table
+  border-collapse: collapse
+  &__head
+    background-color: $cl-primary
+    border: none
+    border-radius: 15px
+    text-align: left
+    font-style: normal
+    font-weight: 500
+    font-size: 20px
+    line-height: 24px
+    color: $cl-white
+  &__row
+    border-bottom: 1px solid rgba(0, 82, 255, 0.102)
+  &__cell
+    border: none
+    height: 64px
+    &:first-child
+      padding-left: 49px
+      border-top-left-radius: 15px
+      border-bottom-left-radius: 15px
+    &:last-child
+      padding-right: 49px
+      border-top-right-radius: 15px
+      border-bottom-right-radius: 15px
+    &--critical
+      color: $cl-secondary-4
+    &--success
+      color: $cl-success
+
+.loading
+  display: flex
+  justify-content: center
+  margin: 20px 0
+  height: 64px
+  &__img
+    height: 100%
+    animation-name: rotation
+    animation-duration: 2s
+    animation-iteration-count: infinite
+    animation-timing-function: linear
+@keyframes rotation
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+.select-check
+  position: relative
+  height: 100%
+  &__header
+    position: relative
+    z-index: 1
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    padding: 10px 0 10px 16px
+    // background: $cl-white
+    border: 1px solid $cl-primary
+    border-radius: 7px
+    height: 100%
+    cursor: pointer
+    transition: border-bottom-right-radius 0.2s ease-in-out, border-bottom-left-radius 0.2s ease-in-out
+    // &:focus
+    //   border-color: $color-primary
+    // &:hover
+    //   border-color: $color-primary
+    //   background-color: $color-primary-bg-light
+    // &:active
+    //   border-color: $color-primary-shade
+    //   background-color: $color-gs-white
+    &:hover
+      background-color: lighten($cl-info, 5%)
+  // &__placeholder
+  &__current
+    margin-right: 0
+    font-weight: 400
+    font-size: 16px
+    line-height: 24px
+    color: $cl-black
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+  &__icon
+    display: flex
+    flex-grow: 0
+    flex-shrink: 0
+    justify-content: center
+    margin-left: auto
+    margin-right: 15px
+    padding-top: 2px
+    height: 13px
+    width: 13px
+    transform: rotate(0)
+    transition: transform 0.2s ease-in-out, margin-top 0.2s ease-in-out
+    svg
+      fill: $cl-black
+  &__body
+    position: absolute
+    left: 0
+    right: 0
+    top: 100%//calc(100% - 10px)
+    z-index: 2
+    padding: 10px 0
+    // border: 1px solid $cl-black
+    border-radius: 7px //0px 0px 10px 10px
+    background-color: $cl-white
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25)
+    // анимация открытия
+    transform: scaleY(0)
+    transform-origin: 50% 0
+    transition: transform 0.2s ease-in-out
+    &--visible
+      transform: scaleY(1)
+  &__item
+    padding: 10px 40px 10px 16px
+    background-repeat: no-repeat
+    background-position: right 16px center
+    font-weight: 400
+    font-size: 16px
+    line-height: 24px
+    color: $cl-grey-2
+    // &:not(:last-child)
+    //   margin-bottom: 11px
+    // &--other
+    //   margin-top: -2px
+    &:hover
+      background-color: $cl-info
+    &--checked
+      background-image: url("./assets/icons/check.svg")
+  // &__input
+  // &__label
+  //   &::before
+  //     width: 32px !important
+  //     height: 20px !important
+  // &__btn
+  //   font-weight: 400
+  //   font-size: 16px
+  //   line-height: 130%
+  //   color: $color-primary
+  &--disabled
+    .select-check__current
+      color: $cl-grey-6
+      cursor: auto
+    .select-check__header:hover
+      background-color: inherit
+    .select-check__icon
+      svg
+        fill: transparent
+
+
+.is-active
+  // .select-check__header, .select-input__header
+  //   border-bottom-right-radius: 0
+  //   border-bottom-left-radius: 0
+  .select-check__icon, .select-input__icon
+    margin-top: 2px
+    transform: rotate(180deg)
+    transition: transform 0.2s ease-in-out, margin-top 0.2s ease-in-out
+  .select-check__body, .select-input__body
+    transform: scaleY(1)
+
+.select-sort
+  &__wrapper
+    width: 300px
+.select-account
+  &__wrapper
+    background-color: $cl-white
+    width: 100%
+  &__header
+    border-color: $cl-grey-5
+.select-currency
+  &__wrapper
+    flex-grow: 1
+    flex-shrink: 1
+    min-width: 80px
+    min-height: 44px
+  &__header
+    border-color: $cl-grey-5
+
+// ? кнопки
+.btn
+  padding: 16px 24px
+  border: 2px solid $cl-primary
+  border-radius: 7px
+  background-color: $cl-white
+  span
+    font-weight: 500
+    font-size: 16px
+    line-height: 20px
+    color: $cl-primary
+  &:focus
+    span
+      border-bottom: 2px solid $cl-primary
+  &:hover
+    span
+      border-bottom: 2px solid $cl-primary
+  &:active
+    background-color: lighten($cl-info, 5%)
+.btn-logo
+  span
+    font-family: $font-secondary, Arial, Verdana, sans-serif
+    font-weight: 300
+    font-size: 48px
+    line-height: 56px
+    color: #FFFFFF
+  &:focus
+    span
+      border-bottom: 2px solid $cl-white
+  &:hover
+    span
+      border-bottom: 2px solid $cl-white
+  &:active
+    span
+      color: $cl-info
+      border-color: $cl-info
+.btn-menu
+  &--checked
+    background-color: $cl-info
+.btn-action
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-wrap: nowrap
+  background-color: $cl-primary
+  span
+    background-repeat: no-repeat
+    background-position: left center
+    color: $cl-white
+  &:focus
+    span
+      border-bottom: 2px solid $cl-white
+  &:hover
+    span
+      border-bottom: 2px solid $cl-white
+  &:active
+    background-color: darken($cl-info, 50%)
+    border-color: darken($cl-info, 50%)
+.btn-create-account
+  span
+    padding-left: 34px
+    background-image: url(./assets/icons/plus.svg)
+.btn-back
+  span
+    padding-left: 34px
+    background-image: url(./assets/icons/back.svg)
+.btn-loading
+  span
+    padding-left: 34px
+    position: relative
+    &::before
+      content: ''
+      position: absolute
+      left: 0
+      top: 0
+      width: 20px
+      height: 20px
+      display: inline-block
+      background-image: url(./assets/icons/loading-light.svg)
+      background-repeat: no-repeat
+      background-position: center center
+      background-size: contain
+      animation-name: rotation
+      animation-duration: 2s
+      animation-iteration-count: infinite
+      animation-timing-function: linear
+.btn-send
+  span
+    padding-left: 34px
+    background-image: url(./assets/icons/mail.svg)
+
+.page-login
+  position: absolute // благодаря этому блок выравнивается по центру контейнера .container
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  display: flex
+  justify-content: center
+  align-items: center
+
+.param
+  display: flex
+  justify-content: space-between
+  align-items: center
+  width: 100%
+  font-family: $font-secondary, Arial, Verdana, sans-serif
+  font-weight: 400
+  font-size: 20px
+  font-style: normal
+  line-height: 23px
+  color: $cl-black
+  &__name
+    width: 100%
+    margin-right: 5px
+    position: relative
+    z-index: 0
+    span
+      padding-right: 10px
+      background-color: $cl-white
+      font-weight: 600
+    &::after
+      content: ""
+      position: absolute
+      z-index: -1
+      left: 0
+      // top: 1.0625rem
+      bottom: 0.35rem
+      width: 100%
+      height: 2px
+      background-image: url("./assets/icons/dot.svg")
+      background-repeat: repeat-x
+  &__value
+    position: relative
+    margin-left: 10px
+    // min-width: 216px
+    &::after
+      content: ""
+      position: absolute
+      z-index: 1
+      top: 5px
+      right: 0
+      width: 20px
+      height: 100%
+      background-repeat: no-repeat
+.param--critical
+  .param__name
+    &::after
+      background-image: url("./assets/icons/dot-red.svg")
+  .param__value
+    padding-right: 30px
+    &::after
+      background-image: url("./assets/icons/down.svg")
+.param--success
+  .param__name
+    &::after
+      background-image: url("./assets/icons/dot-green.svg")
+  .param__value
+    padding-right: 30px
+    &::after
+      background-image: url("./assets/icons/up.svg")
+
+.grid
+  margin-bottom: 50px
+.grid-accounts
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  gap: 50px 70px
+.grid-account
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 50px 50px
+.grid-history
+  display: grid
+  grid-template-columns: 1fr
+  gap: 50px
+.grid-currencies
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 50px 50px
+
+.block
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  padding: 22px
+  border-radius: 9px
+  background: $cl-white
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25)
+  &--grey
+    background-color: $cl-grey-7
+  &--section
+    padding: 50px
+    border-radius: 50px
+.block-account
+  padding: 22px
+  color: $cl-secondary-1
+  &__title
+    margin-bottom: 9px
+    font-family: 'Roboto', Arial, Verdana, sans-serif
+    font-style: normal
+    font-weight: 500
+    font-size: 18px
+    line-height: 22px
+  &__price
+    font-style: normal
+    font-weight: 400
+    font-size: 14px
+    line-height: 20px
+  &__bottom
+    display: flex
+    justify-content: space-between
+    align-items: flex-end
+    height: 52px
+  &__transaction
+    display: flex
+    flex-direction: column
+    font-style: normal
+    margin-right: 20px
+    font-size: 13px
+    line-height: 15px
+    &-subtitle
+      font-weight: 700
+    &-date
+      font-weight: 400
+  &__btn
+    min-width: 110px
+.block-history
+  &__title
+    margin-bottom: 25px
+    font-style: normal
+    font-weight: 700
+    font-size: 20px
+    line-height: 23px
+.block-chart
+  padding: 26px 98px
+  height: 288px
+  &__title
+    margin: 0
+    font-style: normal
+    font-weight: 700
+    font-size: 20px
+    line-height: 23px
+  &__chart
+    width: 100%
+    height: 100%
+  &--small
+    padding: 25px 50px
+.block-currencies
+  max-height: 411px
+  &__title
+    margin-bottom: 25px
+    font-style: normal
+    font-weight: 700
+    font-size: 20px
+    line-height: 23px
+  &__list
+    padding-right: 20px
+    overflow: auto
+  &__info:not(:last-child)
+    margin-bottom: 25px
+.block-rates
+  grid-area: 1 / 2 / span 2 / span 1
+  max-height: 100%
+  &__title
+    margin-bottom: 25px
+    font-style: normal
+    font-weight: 700
+    font-size: 20px
+    line-height: 23px
+  &__name
+    span
+      background-color: $cl-grey-7
+  &__info:not(:last-child)
+    margin-bottom: 25px
+
+.form-transaction
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  padding: 25px 50px
+  &__title
+    margin-bottom: 25px
+    font-style: normal
+    font-weight: 700
+    font-size: 20px
+    line-height: 23px
+  &__wrapper
+    display: flex
+    justify-content: stretch
+    align-items: center
+    min-height: 44px
+    &:not(:last-child)
+      margin-bottom: 25px
+  &__label
+    flex-grow: 0
+    flex-shrink: 0
+    margin-right: 18px
+    min-width: 192px
+    font-family: 'Ubuntu', Arial, Verdana, sans-serif
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 20px
+    text-align: right
+  &__input
+    flex-grow: 1
+    align-self: stretch
+    padding-left: 16px
+    padding-right: 16px
+    background: $cl-white
+    border: 1px solid $cl-grey-5
+    border-radius: 7px
+  &__select
+    align-self: stretch
+    padding-left: 16px
+    padding-right: 16px
+  // &__btn
+.form-login
+  padding: 50px 40px
+  min-width: 500px
+  &__title
+    margin-bottom: 35px
+    text-align: center
+    font-style: normal
+    font-weight: 700
+    font-size: 34px
+    line-height: 40px
+  &__wrapper
+    display: flex
+    align-items: center
+    min-height: 44px
+    &:not(:last-child)
+      margin-bottom: 25px
+    &:last-child
+      padding-top: 5px
+  &__label
+    display: inline-block
+    margin-right: 18px
+    min-width: 57px
+    text-align: right
+    font-family: 'Ubuntu', Arial, Verdana, sans-serif
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 20px
+    color: $cl-secondary-1
+  &__input
+    align-self: stretch
+    padding-left: 16px
+    padding-right: 16px
+    background: $cl-white
+    border: 1px solid $cl-grey-5
+    border-radius: 7px
+    width: 300px
+    max-height: 44px
+  // &__btn
+  //   padding: 14px 21px
+.form-exchange
+  grid-area: 2 / 1
+  &__title
+    margin-bottom: 25px
+    // font-family: $font-secondary
+    font-style: normal
+    font-weight: 700
+    font-size: 20px
+    line-height: 23px
+    color: $cl-black
+  &__wrapper-all
+    display: flex
+    justify-content: stretch
+    align-items: stretch
+  &__wrapper-values
+    flex-grow: 1
+    display: flex
+    flex-direction: column
+    align-items: stretch
+    margin-right: 25px
+  &__wrapper-inputs
+    flex-grow: 1
+    display: flex
+    justify-content: stretch
+    margin-bottom: 25px
+  &__wrapper-input
+    flex-grow: 1
+    display: flex
+    justify-content: stretch
+    align-items: center
+    &:not(:last-child)
+      margin-right: 20px
+  &__label
+    margin-right: 20px
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 20px
+    color: $cl-black
+  &__input
+    flex-grow: 1
+    flex-shrink: 1
+    align-self: stretch
+    padding-left: 16px
+    padding-right: 16px
+    background: $cl-white
+    border: 1px solid $cl-grey-5
+    border-radius: 7px
+    height: 44px
+    font-style: normal
+    font-weight: 400
+    font-size: 16px
+    line-height: 24px
+    color: $cl-black
+    &--from, &--to
+      width: 163px
+      max-width: 163px !important
+
+.points-map
+  margin-bottom: 50px
+  width: 100%
+  min-height: 768px
+
+.notifications
+  position: fixed
+  right: 15px
+  bottom: 15px
+  z-index: 100
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  &__item
+    display: flex
+    align-items: center
+    border: 1px solid
+    border-radius: 7px
+    border-color: $cl-grey-6
+    background-color: $cl-grey-7
+    max-width: 600px
+    min-height: 100px
+    padding: 12px 16px 12px 100px
+    background-repeat: no-repeat
+    background-position: 14px center
+    background-size: 70px 70px
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25)
+    &:not(:last-child)
+      margin-bottom: 15px
+    &.warning
+      background-image: url(./assets/icons/warning-message.svg)
+      background-color: rgb(244,240,230)
+      color: $cl-warning
+    &.success
+      background-image: url(./assets/icons/success-message.svg)
+      background-color: rgb(231,240,232)
+      color: $cl-success
+    &.error
+      background-image: url(./assets/icons/error-message.svg)
+      background-color: rgb(237,220,221)
+      color: $cl-error
+    &.info
+      background-image: url(./assets/icons/info-message.svg)
+      background-color: rgb(220,230,242)
+      color: $cl-info
+  &__text
+    margin-right: 64px
+    font-size: 20px
+    font-weight: 400
+    line-height: 24px
+  &__btn
+    position: relative
+    display: block
+    width: 24px
+    height: 24px
+    margin-right: 0
+    margin-left: auto
+    &::before,
+    &::after
+      content: ''
+      position: absolute
+      top: 11px
+      left: 3px
+      width: 18px
+      height: 2px
+      transform: rotate(45deg)
+      .warning &
+        background-color: $cl-warning
+      .error &
+        background-color: $cl-error
+      .info &
+        background-color: $cl-info
+      .success &
+        background-color: $cl-success
+    &::after
+      transform: rotate(-45deg)
+    &:hover
+      opacity: 0.6
+    &:active,
+    &:focus
+      opacity: 0.8
+
+.pagination
+  display: flex
+  justify-content: center
+  align-items: center
+  margin-top: 20px
+  > *
+    &:not(:last-child)
+      margin-right: 25px
+  .btn
+    padding: 5px 0
+    border: none
+    border-radius: 0
+    background-color: transparent
+    color: $cl-grey-2
+    &:hover
+      border-bottom: 1px solid $cl-grey-2
+    &:active
+      color: $cl-black
+      border-color: $cl-black
+    &[disabled]
+      color: $cl-grey-6
+      cursor: auto
+      &:hover
+        border: none
+      &:active
+        color: $cl-grey-6
+        border-color: $cl-grey-6
+  span
+    font-weight: 700
+    color: $cl-grey-2
